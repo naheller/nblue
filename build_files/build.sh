@@ -31,3 +31,8 @@ dnf5 install -y brave-browser
 ### 1Password
 
 dnf5 install -y https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm
+
+### Mullvad
+
+dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
+dnf5 install -y mullvad-vpn
