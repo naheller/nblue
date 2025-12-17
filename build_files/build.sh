@@ -30,7 +30,27 @@ dnf -y install brave-browser
 
 ### 1Password
 
-dnf -y install https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm
+# dnf -y install https://downloads.1password.com/linux/rpm/stable/x86_64/1password-latest.rpm
+
+# Setup repo
+cat << EOF > /etc/yum.repos.d/1password.repo
+[1password]
+name=1Password Stable Channel
+baseurl=https://downloads.1password.com/linux/rpm/stable/\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://downloads.1password.com/linux/keys/1password.asc
+EOF
+
+# Import signing key
+rpm --import https://downloads.1password.com/linux/keys/1password.asc
+
+# Install the packages
+dnf -y install install 1password 1password-cli
+
+# Clean up the yum repo (updates are baked into new images)
+# rm /etc/yum.repos.d/1password.repo -f
 
 ### Mullvad
 
